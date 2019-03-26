@@ -7,7 +7,7 @@
 
 namespace SprykerShop\Yves\ShopApplication\Twig\Widget\TokenParser;
 
-use SprykerShop\Yves\ShopApplication\Twig\Widget\Node\WidgetTagTwigNode;
+use SprykerShop\Yves\ShopApplication\Twig\Widget\Node\WidgetTagNode;
 use Twig\Error\SyntaxError;
 use Twig\Node\Expression\ArrayExpression;
 use Twig\Node\Expression\ConstantExpression;
@@ -16,10 +16,7 @@ use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
 use Twig\TokenStream;
 
-/**
- * @deprecated Please use `\SprykerShop\Yves\ShopApplication\Twig\Widget\TokenParser\WidgetTagTwigTokenParser` instead.
- */
-class WidgetTagTokenParser extends AbstractTokenParser
+class WidgetTagTwigTokenParser extends AbstractTokenParser
 {
     public const NODE_ARGS = 'args';
 
@@ -70,9 +67,9 @@ class WidgetTagTokenParser extends AbstractTokenParser
     /**
      * @param \Twig\Token $token
      *
-     * @return \SprykerShop\Yves\ShopApplication\Twig\Widget\Node\WidgetTagTwigNode
+     * @return \Twig\Node\Node
      */
-    public function parse(Token $token): WidgetTagTwigNode
+    public function parse(Token $token): Node
     {
         $stream = $this->parser->getStream();
 
@@ -81,7 +78,7 @@ class WidgetTagTokenParser extends AbstractTokenParser
         [$nodes, $attributes] = $this->parseWidgetTagBody($nodes, $attributes, $stream, $token);
         [$nodes, $attributes] = $this->parseWidgetTagForks($nodes, $attributes, $stream, $token);
 
-        return new WidgetTagTwigNode($widgetName, $nodes, $attributes, $token->getLine(), $this->getTag());
+        return new WidgetTagNode($widgetName, $nodes, $attributes, $token->getLine(), $this->getTag());
     }
 
     /**
@@ -303,7 +300,7 @@ class WidgetTagTokenParser extends AbstractTokenParser
 
         $attributes[static::ATTRIBUTE_ELSEWIDGET_CASE] = true;
 
-        return new WidgetTagTwigNode($widgetName, $nodes, $attributes, $token->getLine(), $this->getTag());
+        return new WidgetTagNode($widgetName, $nodes, $attributes, $token->getLine(), $this->getTag());
     }
 
     /**
