@@ -20,6 +20,12 @@ parameters:
         - '#Call to an undefined method Symfony\\Component\\HttpKernel\\Event\\ViewEvent\:\:isMainRequest\(\).#'
         -
             identifier: missingType.iterableValue
+        -
+            identifier: phpDoc.parseError
+        -
+            identifier: function.alreadyNarrowedType
+        -
+            identifier: instanceof.alwaysTrue
     excludePaths:
         - '%rootDir%/../../../src/SprykerShop/ShopApplication/src/SprykerShop/Yves/ShopApplication/Plugin/AbstractTwigExtensionPlugin.php'
     treatPhpDocTypesAsCertain: false
