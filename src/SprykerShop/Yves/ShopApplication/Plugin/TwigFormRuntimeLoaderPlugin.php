@@ -54,33 +54,16 @@ class TwigFormRuntimeLoaderPlugin extends AbstractPlugin implements TwigPluginIn
         return $this->getConfig()->getFormThemes();
     }
 
-    /**
-     * @param \Twig\Environment $twig
-     *
-     * @return \Symfony\Component\Form\FormRendererEngineInterface
-     */
     protected function createTwigRendererEngine(Environment $twig): FormRendererEngineInterface
     {
         return new TwigRendererEngine($this->getTwigTemplateFileNames(), $twig);
     }
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrfTokenManager
-     *
-     * @return \Symfony\Component\Form\FormRendererInterface
-     */
     protected function createFormRenderer(Environment $twig, CsrfTokenManagerInterface $csrfTokenManager): FormRendererInterface
     {
         return new FormRenderer($this->createTwigRendererEngine($twig), $csrfTokenManager);
     }
 
-    /**
-     * @param \Twig\Environment $twig
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Twig\RuntimeLoader\FactoryRuntimeLoader
-     */
     protected function createFactoryRuntimeLoader(Environment $twig, ContainerInterface $container): FactoryRuntimeLoader
     {
         $formRendererCallback = function () use ($twig, $container) {

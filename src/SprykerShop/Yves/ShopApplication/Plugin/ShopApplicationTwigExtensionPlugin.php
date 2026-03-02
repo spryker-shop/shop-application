@@ -16,9 +16,6 @@ use Twig\TwigFunction;
  */
 class ShopApplicationTwigExtensionPlugin extends AbstractTwigExtensionPlugin
 {
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return static::class;

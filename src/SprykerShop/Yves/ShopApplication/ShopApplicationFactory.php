@@ -73,9 +73,6 @@ class ShopApplicationFactory extends AbstractFactory
         return new WidgetFactory($this->createLegacyWidgetFactory(), $this->createCacheKeyGenerator());
     }
 
-    /**
-     * @return \SprykerShop\Yves\ShopApplication\Twig\Widget\CacheKeyGenerator\CacheKeyGeneratorInterface
-     */
     public function createCacheKeyGenerator(): CacheKeyGeneratorInterface
     {
         return new StrategyCacheKeyGenerator($this->getWidgetCacheKeyGeneratorStrategyPlugins());
@@ -117,9 +114,6 @@ class ShopApplicationFactory extends AbstractFactory
         return $this->getGlobalWidgetCollection();
     }
 
-    /**
-     * @return \Spryker\Yves\Kernel\Widget\WidgetContainerInterface
-     */
     public function getGlobalWidgetCollection(): WidgetContainerInterface
     {
         if (static::$globalWidgetCollection === null) {
@@ -163,49 +157,31 @@ class ShopApplicationFactory extends AbstractFactory
         return new RoutingHelper($this->getGlobalContainer(), $this->getUtilTextService());
     }
 
-    /**
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     public function getGlobalContainer(): ContainerInterface
     {
         return $this->getProvidedDependency(ShopApplicationDependencyProvider::GLOBAL_CONTAINER);
     }
 
-    /**
-     * @return \SprykerShop\Yves\ShopApplication\Dependency\Service\ShopApplicationToUtilTextServiceInterface
-     */
     public function getUtilTextService(): ShopApplicationToUtilTextServiceInterface
     {
         return $this->getProvidedDependency(ShopApplicationDependencyProvider::SERVICE_UTIL_TEXT);
     }
 
-    /**
-     * @return \SprykerShop\Yves\ShopApplication\Dependency\Client\ShopApplicationToLocaleClientInterface
-     */
     public function getLocaleClient(): ShopApplicationToLocaleClientInterface
     {
         return $this->getProvidedDependency(ShopApplicationDependencyProvider::CLIENT_LOCALE);
     }
 
-    /**
-     * @return \Twig\TokenParser\TokenParserInterface
-     */
     public function createWidgetTagTokenParser(): TokenParserInterface
     {
         return new WidgetTagTokenParser();
     }
 
-    /**
-     * @return \Twig\TokenParser\TokenParserInterface
-     */
     public function createWidgetTagTwigTokenParser(): TokenParserInterface
     {
         return new WidgetTagTwigTokenParser();
     }
 
-    /**
-     * @return \SprykerShop\Yves\ShopApplication\Twig\Widget\WidgetTagServiceInterface
-     */
     public function createWidgetTagService(): WidgetTagServiceInterface
     {
         return new WidgetTagService(
@@ -223,35 +199,21 @@ class ShopApplicationFactory extends AbstractFactory
         return new ShopApplicationTwigExtensionPlugin();
     }
 
-    /**
-     * @return \Spryker\Shared\Twig\Loader\FilesystemLoaderInterface
-     */
     public function createFilesystemLoader(): FilesystemLoaderInterface
     {
         return new FilesystemLoader($this->getConfig()->getShopApplicationResources());
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Symfony\Component\EventDispatcher\EventSubscriberInterface
-     */
     public function createShopApplicationTwigEventSubscriber(ContainerInterface $container): EventSubscriberInterface
     {
         return new ShopApplicationTwigEventSubscriber($container, $this->createWidgetContainerRegistry(), $this->createRoutingHelper(), $this->getConfig());
     }
 
-    /**
-     * @return \Spryker\Shared\Application\ApplicationInterface
-     */
     public function createApplication(): ApplicationInterface
     {
         return new Application($this->createServiceContainer(), $this->getApplicationPlugins());
     }
 
-    /**
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     public function createServiceContainer(): ContainerInterface
     {
         return new ContainerProxy(['logger' => null, 'debug' => $this->getConfig()->isDebugModeEnabled(), 'charset' => 'UTF-8']);

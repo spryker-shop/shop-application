@@ -16,9 +16,6 @@ use Twig\Test\NodeTestCase;
 
 class WidgetTagTest extends NodeTestCase
 {
-    /**
-     * @return array
-     */
     public function getTests(): array
     {
         return [
@@ -326,11 +323,6 @@ EOF;
         return [$node, $expectedCode];
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
     protected function getAttributes(array $attributes = []): array
     {
         return array_merge([

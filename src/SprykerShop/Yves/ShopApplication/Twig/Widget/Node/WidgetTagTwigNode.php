@@ -22,13 +22,6 @@ class WidgetTagTwigNode extends Node
      */
     protected $widgetName;
 
-    /**
-     * @param string $widgetName
-     * @param array $nodes
-     * @param array $attributes
-     * @param int $lineno
-     * @param string|null $tag
-     */
     public function __construct(string $widgetName, array $nodes = [], array $attributes = [], int $lineno = 0, ?string $tag = null)
     {
         parent::__construct($nodes, $attributes, $lineno, $tag);
@@ -36,11 +29,6 @@ class WidgetTagTwigNode extends Node
         $this->widgetName = $widgetName;
     }
 
-    /**
-     * @param \Twig\Compiler $compiler
-     *
-     * @return void
-     */
     public function compile(Compiler $compiler): void
     {
         if (!$this->getAttribute(WidgetTagTokenParser::ATTRIBUTE_ELSEWIDGET_CASE)) {
@@ -62,11 +50,6 @@ class WidgetTagTwigNode extends Node
         $this->compileNowidget($compiler);
     }
 
-    /**
-     * @param \Twig\Compiler $compiler
-     *
-     * @return void
-     */
     protected function addOpenWidgetContext(Compiler $compiler): void
     {
         $compiler->raw(sprintf('$widget = $context[\'app\'][\'%s\']->openWidgetContext(', WidgetTagServiceProvider::WIDGET_TAG_SERVICE));
@@ -84,11 +67,6 @@ class WidgetTagTwigNode extends Node
         }
     }
 
-    /**
-     * @param \Twig\Compiler $compiler
-     *
-     * @return void
-     */
     protected function addLoadTemplate(Compiler $compiler): void
     {
         $compiler
@@ -107,11 +85,6 @@ class WidgetTagTwigNode extends Node
         $compiler->raw(");\n");
     }
 
-    /**
-     * @param \Twig\Compiler $compiler
-     *
-     * @return void
-     */
     protected function addTemplateArguments(Compiler $compiler): void
     {
         if (!$this->hasNode(WidgetTagTokenParser::NODE_WITH)) {
@@ -151,11 +124,6 @@ class WidgetTagTwigNode extends Node
             ->raw(')');
     }
 
-    /**
-     * @param \Twig\Compiler $compiler
-     *
-     * @return void
-     */
     protected function addDisplayMetaArguments(Compiler $compiler): void
     {
         $compiler->raw('array(');
@@ -165,31 +133,16 @@ class WidgetTagTwigNode extends Node
         $compiler->raw(')');
     }
 
-    /**
-     * @param \Twig\Compiler $compiler
-     *
-     * @return void
-     */
     protected function addCloseWidgetContext(Compiler $compiler): void
     {
         $compiler->write(sprintf("\$context['app']['%s']->closeWidgetContext();\n", WidgetTagServiceProvider::WIDGET_TAG_SERVICE));
     }
 
-    /**
-     * @param \Twig\Compiler $compiler
-     *
-     * @return void
-     */
     protected function addWidgetMetaArgument(Compiler $compiler): void
     {
         $compiler->raw(sprintf('"%s" => $widget', WidgetTagTokenParser::VARIABLE_WIDGET));
     }
 
-    /**
-     * @param \Twig\Compiler $compiler
-     *
-     * @return void
-     */
     protected function addTemplatePathMetaArgument(Compiler $compiler): void
     {
         $compiler->raw(sprintf(
@@ -207,11 +160,6 @@ class WidgetTagTwigNode extends Node
         $compiler->raw(')');
     }
 
-    /**
-     * @param \Twig\Compiler $compiler
-     *
-     * @return void
-     */
     protected function compileElsewidgets(Compiler $compiler): void
     {
         if (!$this->hasNode(WidgetTagTokenParser::NODE_ELSEWIDGETS)) {
@@ -229,11 +177,6 @@ class WidgetTagTwigNode extends Node
         }
     }
 
-    /**
-     * @param \Twig\Compiler $compiler
-     *
-     * @return void
-     */
     protected function compileNowidget(Compiler $compiler): void
     {
         if (!$this->hasNode(WidgetTagTokenParser::NODE_NOWIDGET)) {

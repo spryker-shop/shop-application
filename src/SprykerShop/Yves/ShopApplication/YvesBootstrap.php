@@ -75,9 +75,6 @@ abstract class YvesBootstrap
         return $this->sprykerApplication;
     }
 
-    /**
-     * @return \Spryker\Yves\Kernel\Application
-     */
     protected function getBaseApplication(): SilexApplication
     {
         $application = new SilexApplication();
@@ -86,9 +83,6 @@ abstract class YvesBootstrap
         return $application;
     }
 
-    /**
-     * @return void
-     */
     protected function setupApplication(): void
     {
         foreach ($this->getApplicationPlugins() as $applicationPlugin) {
@@ -104,12 +98,6 @@ abstract class YvesBootstrap
         return $this->getProvidedDependency(ShopApplicationDependencyProvider::PLUGINS_APPLICATION);
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\AbstractBundleDependencyProvider $dependencyProvider
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function provideExternalDependencies(AbstractBundleDependencyProvider $dependencyProvider, Container $container): Container
     {
         $container = $dependencyProvider->provideDependencies($container);
@@ -117,12 +105,6 @@ abstract class YvesBootstrap
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Dependency\Injector\DependencyInjectorInterface $dependencyInjector
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function injectExternalDependencies(DependencyInjectorInterface $dependencyInjector, Container $container): Container
     {
         /** @var \Spryker\Yves\Kernel\Container $container */

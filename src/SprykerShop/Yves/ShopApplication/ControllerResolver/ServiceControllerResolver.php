@@ -26,19 +26,12 @@ class ServiceControllerResolver implements ControllerResolverInterface, Argument
      */
     protected $callbackResolver;
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Controller\ControllerResolverInterface $controllerResolver
-     * @param \SprykerShop\Yves\ShopApplication\ControllerResolver\CallbackControllerResolverInterface $callbackResolver
-     */
     public function __construct(ControllerResolverInterface $controllerResolver, CallbackControllerResolverInterface $callbackResolver)
     {
         $this->controllerResolver = $controllerResolver;
         $this->callbackResolver = $callbackResolver;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getController(Request $request): callable|false
     {
         $controller = $request->attributes->get('_controller', null);
@@ -51,12 +44,6 @@ class ServiceControllerResolver implements ControllerResolverInterface, Argument
         return $this->callbackResolver->convertCallback($controller);
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param callable $controller
-     *
-     * @return array
-     */
     public function getArguments(Request $request, callable $controller): array
     {
         if (method_exists($this->controllerResolver, 'getArguments')) {

@@ -46,11 +46,6 @@ class ShopApplicationApplicationPlugin extends AbstractPlugin implements Applica
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function addDebugMode(ContainerInterface $container): ContainerInterface
     {
         $container->set(static::DEBUG, function () {

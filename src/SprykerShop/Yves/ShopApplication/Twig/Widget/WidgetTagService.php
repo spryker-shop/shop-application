@@ -29,11 +29,6 @@ class WidgetTagService implements WidgetTagServiceInterface
      */
     protected $widgetFactory;
 
-    /**
-     * @param \Spryker\Yves\Kernel\Widget\WidgetContainerRegistryInterface $widgetContainerRegistry
-     * @param \Spryker\Yves\Kernel\Widget\WidgetContainerInterface $globalWidgetCollection
-     * @param \SprykerShop\Yves\ShopApplication\Twig\Widget\WidgetFactoryInterface $widgetFactory
-     */
     public function __construct(
         WidgetContainerRegistryInterface $widgetContainerRegistry,
         WidgetContainerInterface $globalWidgetCollection,
@@ -90,9 +85,6 @@ class WidgetTagService implements WidgetTagServiceInterface
         return $widget->getTemplate();
     }
 
-    /**
-     * @return void
-     */
     public function closeWidgetContext(): void
     {
         $this->widgetContainerRegistry->removeLastAdded();

@@ -234,12 +234,6 @@ class WidgetServiceProvider extends WidgetTagServiceProvider
         return $widgetContainer;
     }
 
-    /**
-     * @param string $widgetName
-     * @param \Throwable $e
-     *
-     * @return \SprykerShop\Yves\ShopApplication\Exception\WidgetRenderException
-     */
     protected function createWidgetRenderException(string $widgetName, Throwable $e): WidgetRenderException
     {
         return new WidgetRenderException(sprintf(

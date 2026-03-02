@@ -9,11 +9,5 @@ namespace SprykerShop\Yves\ShopApplication\Twig\Widget\CacheKeyGenerator;
 
 interface CacheKeyGeneratorInterface
 {
-    /**
-     * @param string $widgetClassName
-     * @param array $arguments
-     *
-     * @return string|null
-     */
     public function generateCacheKey(string $widgetClassName, array $arguments): ?string;
 }

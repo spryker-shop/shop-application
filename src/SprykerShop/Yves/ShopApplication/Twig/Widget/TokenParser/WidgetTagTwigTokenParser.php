@@ -113,19 +113,11 @@ class WidgetTagTwigTokenParser extends AbstractTokenParser
      */
     protected const TOKEN_ARGS = 'args';
 
-    /**
-     * @return string
-     */
     public function getTag(): string
     {
         return 'widget';
     }
 
-    /**
-     * @param \Twig\Token $token
-     *
-     * @return \Twig\Node\Node
-     */
     public function parse(Token $token): Node
     {
         $stream = $this->parser->getStream();
@@ -138,11 +130,6 @@ class WidgetTagTwigTokenParser extends AbstractTokenParser
         return new WidgetTagNode($widgetName, $nodes, $attributes, $token->getLine(), $this->getTag());
     }
 
-    /**
-     * @param \Twig\TokenStream $stream
-     *
-     * @return array
-     */
     protected function parseWidgetName(TokenStream $stream): array
     {
         $nodes = [];
@@ -199,11 +186,6 @@ class WidgetTagTwigTokenParser extends AbstractTokenParser
         return [$nodes, $attributes];
     }
 
-    /**
-     * @param \Twig\TokenStream $stream
-     *
-     * @return \Twig\Node\Node|null
-     */
     protected function parseArgs(TokenStream $stream): ?Node
     {
         if ($stream->nextIf(Token::NAME_TYPE, static::TOKEN_ARGS)) {
@@ -213,11 +195,6 @@ class WidgetTagTwigTokenParser extends AbstractTokenParser
         return null;
     }
 
-    /**
-     * @param \Twig\TokenStream $stream
-     *
-     * @return \Twig\Node\Node|null
-     */
     protected function parseUse(TokenStream $stream): ?Node
     {
         if ($stream->nextIf(Token::NAME_TYPE, static::TOKEN_USE)) {
@@ -227,11 +204,6 @@ class WidgetTagTwigTokenParser extends AbstractTokenParser
         return null;
     }
 
-    /**
-     * @param \Twig\TokenStream $stream
-     *
-     * @return \Twig\Node\Node|null
-     */
     protected function parseWith(TokenStream $stream): ?Node
     {
         if ($stream->nextIf(Token::NAME_TYPE, static::TOKEN_WITH)) {
@@ -241,11 +213,6 @@ class WidgetTagTwigTokenParser extends AbstractTokenParser
         return null;
     }
 
-    /**
-     * @param \Twig\TokenStream $stream
-     *
-     * @return bool
-     */
     protected function parseOnly(TokenStream $stream): bool
     {
         if ($stream->nextIf(Token::NAME_TYPE, static::TOKEN_ONLY)) {
@@ -255,14 +222,6 @@ class WidgetTagTwigTokenParser extends AbstractTokenParser
         return false;
     }
 
-    /**
-     * @param array $nodes
-     * @param array $attributes
-     * @param \Twig\TokenStream $stream
-     * @param \Twig\Token $token
-     *
-     * @return array
-     */
     protected function parseWidgetTagBody(array $nodes, array $attributes, TokenStream $stream, Token $token): array
     {
         // fake extension from the (calculated) widget template
@@ -334,11 +293,6 @@ class WidgetTagTwigTokenParser extends AbstractTokenParser
         return [$nodes, $attributes];
     }
 
-    /**
-     * @param \Twig\TokenStream $stream
-     *
-     * @return \Twig\Node\Node
-     */
     protected function parseNowidget(TokenStream $stream): Node
     {
         $stream->expect(Token::BLOCK_END_TYPE);
@@ -346,12 +300,6 @@ class WidgetTagTwigTokenParser extends AbstractTokenParser
         return $this->parser->subparse([$this, 'decideIfEnd']);
     }
 
-    /**
-     * @param \Twig\TokenStream $stream
-     * @param \Twig\Token $token
-     *
-     * @return \Twig\Node\Node
-     */
     protected function parseElsewidget(TokenStream $stream, Token $token): Node
     {
         [$widgetName, $nodes] = $this->parseWidgetName($stream);
@@ -363,11 +311,6 @@ class WidgetTagTwigTokenParser extends AbstractTokenParser
         return new WidgetTagNode($widgetName, $nodes, $attributes, $token->getLine(), $this->getTag());
     }
 
-    /**
-     * @param \Twig\Token $token
-     *
-     * @return bool
-     */
     public function decideIfFork(Token $token): bool
     {
         return $token->test([
@@ -377,11 +320,6 @@ class WidgetTagTwigTokenParser extends AbstractTokenParser
         ]);
     }
 
-    /**
-     * @param \Twig\Token $token
-     *
-     * @return bool
-     */
     public function decideIfEnd(Token $token): bool
     {
         return $token->test([static::TOKEN_ENDWIDGET]);

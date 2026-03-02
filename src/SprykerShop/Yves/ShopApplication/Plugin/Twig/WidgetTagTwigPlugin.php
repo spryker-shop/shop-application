@@ -78,9 +78,6 @@ class WidgetTagTwigPlugin extends AbstractTwigExtensionPlugin
         return $this->getFactory()->createWidgetTagService()->getTemplatePath($widget, $templatePath);
     }
 
-    /**
-     * @return void
-     */
     public function closeWidgetContext(): void
     {
         $this->getFactory()->createWidgetTagService()->closeWidgetContext();

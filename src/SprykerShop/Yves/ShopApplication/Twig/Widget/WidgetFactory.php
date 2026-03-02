@@ -30,10 +30,6 @@ class WidgetFactory implements WidgetFactoryInterface
      */
     protected static $widgetCache = [];
 
-    /**
-     * @param \Spryker\Yves\Kernel\Widget\WidgetFactoryInterface $legacyWidgetPluginFactory
-     * @param \SprykerShop\Yves\ShopApplication\Twig\Widget\CacheKeyGenerator\CacheKeyGeneratorInterface $cacheKeyGenerator
-     */
     public function __construct(LegacyWidgetFactoryInterface $legacyWidgetPluginFactory, CacheKeyGeneratorInterface $cacheKeyGenerator)
     {
         $this->legacyWidgetPluginFactory = $legacyWidgetPluginFactory;
@@ -70,12 +66,6 @@ class WidgetFactory implements WidgetFactoryInterface
         return $widget;
     }
 
-    /**
-     * @param string $widgetClassName
-     * @param array $arguments
-     *
-     * @return \Spryker\Yves\Kernel\Dependency\Widget\WidgetInterface
-     */
     protected function createWidgetInstance(string $widgetClassName, array $arguments): WidgetInterface
     {
         $this->assertClassIsWidget($widgetClassName);
@@ -104,22 +94,11 @@ class WidgetFactory implements WidgetFactoryInterface
         }
     }
 
-    /**
-     * @param string $cacheKey
-     *
-     * @return \Spryker\Yves\Kernel\Dependency\Widget\WidgetInterface|null
-     */
     protected function getCachedWidget(string $cacheKey): ?WidgetInterface
     {
         return static::$widgetCache[$cacheKey] ?? null;
     }
 
-    /**
-     * @param string $cacheKey
-     * @param \Spryker\Yves\Kernel\Dependency\Widget\WidgetInterface $widget
-     *
-     * @return void
-     */
     protected function cacheWidget(string $cacheKey, WidgetInterface $widget): void
     {
         static::$widgetCache[$cacheKey] = $widget;

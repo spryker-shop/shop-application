@@ -16,9 +16,6 @@ class TwigRenderer implements TwigRendererInterface
      */
     protected $routingHelper;
 
-    /**
-     * @param \SprykerShop\Yves\ShopApplication\Twig\RoutingHelperInterface $routingHelper
-     */
     public function __construct(RoutingHelperInterface $routingHelper)
     {
         $this->routingHelper = $routingHelper;

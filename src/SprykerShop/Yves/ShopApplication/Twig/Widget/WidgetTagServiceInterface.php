@@ -27,8 +27,5 @@ interface WidgetTagServiceInterface
      */
     public function getTemplatePath($widget, ?string $templatePath = null): string;
 
-    /**
-     * @return void
-     */
     public function closeWidgetContext(): void;
 }

@@ -71,11 +71,6 @@ class WidgetTwigPlugin extends AbstractPlugin implements TwigPluginInterface
         return $twig;
     }
 
-    /**
-     * @param \Twig\Environment $twig
-     *
-     * @return \Twig\Environment
-     */
     protected function addTwigFunctions(Environment $twig): Environment
     {
         $twig->addFunction($this->createWidgetFunction());
@@ -219,9 +214,6 @@ class WidgetTwigPlugin extends AbstractPlugin implements TwigPluginInterface
         );
     }
 
-    /**
-     * @return \Twig\TwigFunction
-     */
     protected function createWidgetExistsFunction(): TwigFunction
     {
         return new TwigFunction(
@@ -235,9 +227,6 @@ class WidgetTwigPlugin extends AbstractPlugin implements TwigPluginInterface
         );
     }
 
-    /**
-     * @return \Twig\TwigFunction
-     */
     protected function createWidgetGlobalExistsFunction(): TwigFunction
     {
         return new TwigFunction(
@@ -271,12 +260,6 @@ class WidgetTwigPlugin extends AbstractPlugin implements TwigPluginInterface
         return $widgetContainer;
     }
 
-    /**
-     * @param string $widgetName
-     * @param \Throwable $e
-     *
-     * @return \SprykerShop\Yves\ShopApplication\Exception\WidgetRenderException
-     */
     protected function createWidgetRenderException(string $widgetName, Throwable $e): WidgetRenderException
     {
         return new WidgetRenderException(sprintf(

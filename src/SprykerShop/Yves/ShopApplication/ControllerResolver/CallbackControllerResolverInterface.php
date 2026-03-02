@@ -25,10 +25,5 @@ interface CallbackControllerResolverInterface
      */
     public function convertCallback(string $name): array;
 
-    /**
-     * @param string $name
-     *
-     * @return array
-     */
     public function resolveCallback(string $name): array;
 }

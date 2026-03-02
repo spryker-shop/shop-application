@@ -22,9 +22,6 @@ class YvesBootstrap
     use BundleDependencyProviderResolverAwareTrait;
     use FactoryResolverAwareTrait;
 
-    /**
-     * @return \Spryker\Shared\Application\ApplicationInterface
-     */
     public function boot(): ApplicationInterface
     {
         return $this->getFactory()
@@ -32,12 +29,6 @@ class YvesBootstrap
             ->boot();
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\AbstractBundleDependencyProvider $dependencyProvider
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function provideExternalDependencies(
         AbstractBundleDependencyProvider $dependencyProvider,
         Container $container
@@ -47,12 +38,6 @@ class YvesBootstrap
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Dependency\Injector\DependencyInjector $dependencyInjector
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function injectExternalDependencies(
         DependencyInjector $dependencyInjector,
         Container $container

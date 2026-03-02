@@ -24,12 +24,6 @@ class StrategyCacheKeyGenerator implements CacheKeyGeneratorInterface
         }
     }
 
-    /**
-     * @param string $widgetClassName
-     * @param array $arguments
-     *
-     * @return string|null
-     */
     public function generateCacheKey(string $widgetClassName, array $arguments): ?string
     {
         if (!isset(static::$widgetCacheKeyGeneratorPlugins[$widgetClassName])) {
@@ -45,11 +39,6 @@ class StrategyCacheKeyGenerator implements CacheKeyGeneratorInterface
         return md5($widgetClassName . $key);
     }
 
-    /**
-     * @param array $arguments
-     *
-     * @return string
-     */
     protected function argumentSerializer(array $arguments): string
     {
         $result = '';

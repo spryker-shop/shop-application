@@ -25,9 +25,6 @@ class CallbackControllerResolver implements CallbackControllerResolverInterface
      */
     protected $container;
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;

@@ -134,11 +134,6 @@ class ShopApplicationDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addLocaleClient(Container $container): Container
     {
         $container->set(static::CLIENT_LOCALE, function (Container $container): ShopApplicationToLocaleClientInterface {
@@ -179,11 +174,6 @@ class ShopApplicationDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addWidgetCacheKeyGeneratorStrategyPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_WIDGET_CACHE_KEY_GENERATOR_STRATEGY, function () {
@@ -223,11 +213,6 @@ class ShopApplicationDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addFilterControllerEventSubscriberPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_FILTER_CONTROLLER_EVENT_SUBSCRIBER, function () {
@@ -237,11 +222,6 @@ class ShopApplicationDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addApplicationPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_APPLICATION, function (Container $container): array {

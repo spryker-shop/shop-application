@@ -59,11 +59,6 @@ class RoutingHelper implements RoutingHelperInterface
         return $module . '/' . $controller . '/' . $action;
     }
 
-    /**
-     * @param string $moduleName
-     *
-     * @return string
-     */
     protected function resolveModuleName(string $moduleName): string
     {
         $codeBucketIdentifierLength = mb_strlen(APPLICATION_CODE_BUCKET);

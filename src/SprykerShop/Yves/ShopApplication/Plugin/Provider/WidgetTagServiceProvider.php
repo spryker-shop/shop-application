@@ -82,11 +82,6 @@ class WidgetTagServiceProvider extends AbstractPlugin implements ServiceProvider
         }, 0);
     }
 
-    /**
-     * @param \Silex\Application $application
-     *
-     * @return void
-     */
     protected function addWidgetTagService(Application $application): void
     {
         $application[static::WIDGET_TAG_SERVICE] = $application->share(function () {
@@ -94,11 +89,6 @@ class WidgetTagServiceProvider extends AbstractPlugin implements ServiceProvider
         });
     }
 
-    /**
-     * @param \Silex\Application $application
-     *
-     * @return void
-     */
     protected function addWidgetTagTokenParser(Application $application): void
     {
         $application['twig'] = $application->share(
@@ -156,12 +146,6 @@ class WidgetTagServiceProvider extends AbstractPlugin implements ServiceProvider
         return $widget;
     }
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Event\ViewEvent $event
-     * @param \Spryker\Shared\Kernel\Communication\Application $application
-     *
-     * @return void
-     */
     protected function onKernelView(ViewEvent $event, SprykerApplication $application): void
     {
         /** @var \Spryker\Yves\Kernel\Widget\WidgetContainerInterface $result */
@@ -201,11 +185,6 @@ class WidgetTagServiceProvider extends AbstractPlugin implements ServiceProvider
         }
     }
 
-    /**
-     * @param \Twig\Environment $twig
-     *
-     * @return \Spryker\Yves\Kernel\View\ViewInterface|null
-     */
     protected function getGlobalView(Environment $twig): ?ViewInterface
     {
         $twigGlobals = $twig->getGlobals();
@@ -217,11 +196,6 @@ class WidgetTagServiceProvider extends AbstractPlugin implements ServiceProvider
         return $twigGlobals[static::TWIG_GLOBAL_VARIABLE_NAME_VIEW];
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\View\ViewInterface $view
-     *
-     * @return array
-     */
     protected function getViewParameters(ViewInterface $view): array
     {
         if ($this->getConfig()->useViewParametersToRenderTwig()) {
@@ -231,11 +205,6 @@ class WidgetTagServiceProvider extends AbstractPlugin implements ServiceProvider
         return [];
     }
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Event\ViewEvent $event
-     *
-     * @return bool
-     */
     protected function isMainRequest(ViewEvent $event): bool
     {
         if (method_exists($event, 'isMasterRequest')) {

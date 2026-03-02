@@ -58,12 +58,6 @@ class ShopApplicationTwigEventSubscriber implements EventSubscriberInterface
      */
     protected $shopApplicationConfig;
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     * @param \Spryker\Yves\Kernel\Widget\WidgetContainerRegistryInterface $widgetContainerRegistry
-     * @param \SprykerShop\Yves\ShopApplication\Twig\RoutingHelperInterface $routingHelper
-     * @param \SprykerShop\Yves\ShopApplication\ShopApplicationConfig $shopApplicationConfig
-     */
     public function __construct(
         ContainerInterface $container,
         WidgetContainerRegistryInterface $widgetContainerRegistry,
@@ -87,21 +81,11 @@ class ShopApplicationTwigEventSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent $event
-     *
-     * @return void
-     */
     public function onControllerResolved(ControllerArgumentsEvent $event): void
     {
         $this->addGlobalView(null);
     }
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Event\ViewEvent $event
-     *
-     * @return void
-     */
     public function onKernelView(ViewEvent $event): void
     {
         $result = $event->getControllerResult();
@@ -127,20 +111,12 @@ class ShopApplicationTwigEventSubscriber implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\View\ViewInterface|null $view
-     *
-     * @return void
-     */
     protected function addGlobalView(?ViewInterface $view): void
     {
         $twig = $this->getTwig();
         $twig->addGlobal(static::TWIG_GLOBAL_VARIABLE_NAME_VIEW, $view);
     }
 
-    /**
-     * @return \Spryker\Yves\Kernel\View\ViewInterface|null
-     */
     protected function getGlobalView(): ?ViewInterface
     {
         $twigGlobals = $this->getTwig()->getGlobals();
@@ -202,9 +178,6 @@ class ShopApplicationTwigEventSubscriber implements EventSubscriberInterface
         return $template;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\RequestStack
-     */
     protected function getRequestStack(): RequestStack
     {
         return $this->container->get(static::SERVICE_REQUEST_STACK);
@@ -239,9 +212,6 @@ class ShopApplicationTwigEventSubscriber implements EventSubscriberInterface
         return $response;
     }
 
-    /**
-     * @return \Twig\Environment
-     */
     protected function getTwig(): Environment
     {
         return $this->container->get(static::SERVICE_TWIG);
@@ -261,21 +231,11 @@ class ShopApplicationTwigEventSubscriber implements EventSubscriberInterface
         return (array)$result;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Widget\WidgetContainerInterface $result
-     *
-     * @return void
-     */
     protected function addWidgetContainerRegister(WidgetContainerInterface $result): void
     {
         $this->widgetContainerRegistry->add($result);
     }
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Event\ViewEvent $event
-     *
-     * @return bool
-     */
     protected function isMainRequest(ViewEvent $event): bool
     {
         if (method_exists($event, 'isMasterRequest')) {
