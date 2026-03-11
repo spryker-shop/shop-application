@@ -8,6 +8,7 @@
 namespace SprykerShop\Yves\ShopApplication\Plugin\Twig;
 
 use SprykerShop\Yves\ShopApplication\Plugin\AbstractTwigExtensionPlugin;
+use SprykerShop\Yves\ShopApplication\Twig\Widget\WidgetTagServiceInterface;
 use Twig\TwigFunction;
 
 /**
@@ -19,6 +20,8 @@ class WidgetTagTwigPlugin extends AbstractTwigExtensionPlugin
      * @var string
      */
     protected const TWIG_FUNCTION_NAME_FIND_WIDGET = 'findWidget';
+
+    protected static ?WidgetTagServiceInterface $widgetTagService = null;
 
     /**
      * @return array<\Twig\TokenParser\TokenParserInterface>
@@ -64,7 +67,7 @@ class WidgetTagTwigPlugin extends AbstractTwigExtensionPlugin
      */
     public function openWidgetContext($widgetExpression, array $arguments = [])
     {
-        return $this->getFactory()->createWidgetTagService()->openWidgetContext($widgetExpression, $arguments);
+        return $this->createWidgetTagService()->openWidgetContext($widgetExpression, $arguments);
     }
 
     /**
@@ -75,11 +78,20 @@ class WidgetTagTwigPlugin extends AbstractTwigExtensionPlugin
      */
     public function getTemplatePath($widget, ?string $templatePath = null): string
     {
-        return $this->getFactory()->createWidgetTagService()->getTemplatePath($widget, $templatePath);
+        return $this->createWidgetTagService()->getTemplatePath($widget, $templatePath);
     }
 
     public function closeWidgetContext(): void
     {
-        $this->getFactory()->createWidgetTagService()->closeWidgetContext();
+        $this->createWidgetTagService()->closeWidgetContext();
+    }
+
+    protected function createWidgetTagService(): WidgetTagServiceInterface
+    {
+        if (static::$widgetTagService === null) {
+            static::$widgetTagService = $this->getFactory()->createWidgetTagService();
+        }
+
+        return static::$widgetTagService;
     }
 }
