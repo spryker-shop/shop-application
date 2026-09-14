@@ -7,6 +7,7 @@
 
 namespace SprykerShop\Yves\ShopApplication\ControllerResolver;
 
+use ReflectionFunctionAbstract;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface;
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
@@ -44,10 +45,10 @@ class ServiceControllerResolver implements ControllerResolverInterface, Argument
         return $this->callbackResolver->convertCallback($controller);
     }
 
-    public function getArguments(Request $request, callable $controller): array
+    public function getArguments(Request $request, callable $controller, ?ReflectionFunctionAbstract $reflector = null): array
     {
         if (method_exists($this->controllerResolver, 'getArguments')) {
-            return $this->controllerResolver->getArguments($request, $controller);
+            return $this->controllerResolver->getArguments($request, $controller, $reflector);
         }
 
         return [];

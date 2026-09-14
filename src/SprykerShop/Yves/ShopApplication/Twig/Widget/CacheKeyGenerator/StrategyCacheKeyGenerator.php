@@ -7,6 +7,8 @@
 
 namespace SprykerShop\Yves\ShopApplication\Twig\Widget\CacheKeyGenerator;
 
+use Throwable;
+
 class StrategyCacheKeyGenerator implements CacheKeyGeneratorInterface
 {
     /**
@@ -58,7 +60,15 @@ class StrategyCacheKeyGenerator implements CacheKeyGeneratorInterface
                     continue;
                 }
             }
-            $result .= serialize($argument);
+            // Some objects reachable through here (e.g. Request, which since the Symfony
+            // Authenticator-based security migration can transitively hold the DI container
+            // via request attributes like `_security_skipped_authenticators`) are not
+            // serializable. Fall back to a stable-per-instance hash instead of crashing.
+            try {
+                $result .= serialize($argument);
+            } catch (Throwable $exception) {
+                $result .= is_object($argument) ? spl_object_hash($argument) : uniqid();
+            }
         }
 
         return $result;
