@@ -260,15 +260,15 @@ class WidgetTwigPlugin extends AbstractPlugin implements TwigPluginInterface
         return $widgetContainer;
     }
 
-    protected function createWidgetRenderException(string $widgetName, Throwable $e): WidgetRenderException
+    protected function createWidgetRenderException(string $widgetName, Throwable $exception): WidgetRenderException
     {
         return new WidgetRenderException(sprintf(
             '%s - Something went wrong in widget "%s": %s in %s:%d',
-            get_class($e),
+            get_class($exception),
             $widgetName,
-            $e->getMessage(),
-            $e->getFile(),
-            $e->getLine(),
-        ), $e->getCode(), $e);
+            $exception->getMessage(),
+            $exception->getFile(),
+            $exception->getLine(),
+        ), $exception->getCode(), $exception);
     }
 }

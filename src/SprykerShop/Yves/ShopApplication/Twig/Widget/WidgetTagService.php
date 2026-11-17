@@ -115,19 +115,19 @@ class WidgetTagService implements WidgetTagServiceInterface
 
     /**
      * @param \Spryker\Yves\Kernel\Dependency\Widget\WidgetInterface|\Spryker\Yves\Kernel\Dependency\Plugin\WidgetPluginInterface|string $widgetExpression
-     * @param \Throwable $e
+     * @param \Throwable $exception
      *
      * @return \SprykerShop\Yves\ShopApplication\Exception\WidgetRenderException
      */
-    protected function createWidgetRenderException($widgetExpression, Throwable $e): WidgetRenderException
+    protected function createWidgetRenderException($widgetExpression, Throwable $exception): WidgetRenderException
     {
         return new WidgetRenderException(sprintf(
             '%s - Something went wrong in widget "%s": %s in %s:%d',
-            get_class($e),
+            get_class($exception),
             is_object($widgetExpression) ? get_class($widgetExpression) : $widgetExpression,
-            $e->getMessage(),
-            $e->getFile(),
-            $e->getLine(),
-        ), $e->getCode(), $e);
+            $exception->getMessage(),
+            $exception->getFile(),
+            $exception->getLine(),
+        ), $exception->getCode(), $exception);
     }
 }
